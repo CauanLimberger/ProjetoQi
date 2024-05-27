@@ -61,7 +61,7 @@ fun MainScreen(navController: NavController){
                     },
                     modifier = Modifier.padding(top = 50.dp).padding(horizontal = 135.dp, 20.dp),
 
-                ){
+                    ){
                     Text("Editar Produto")
                 }
                 TopAppBar(
@@ -161,7 +161,7 @@ fun SearchScreen(navController: NavController) {
                 )
 
             }
-            
+
         }
 
     }

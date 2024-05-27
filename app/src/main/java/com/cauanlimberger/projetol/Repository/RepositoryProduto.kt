@@ -7,46 +7,37 @@ import com.cauanlimberger.projetol.model.Produto
 
 import com.cauanlimberger.projetol.model.ProdutoDAO
 
-class RepositoryProduto (private val context: Context) {
-private val db = ProdutoDAO(context).writableDatabase
+class RepositoryProduto (produto: Produto) {
+ private val db = ProdutoDAO(context).writableDatabase
 
-companion object{
-private val TABLE = "Produtos"
+ companion object{
+  private val TABLE = "Produtos"
  }
- fun inserirRegistro(produto: Produto): Long{
+ fun insert(produto: Produto): Long{
 
   val contentValues = ContentValues().apply {
-
 
    put("nome", produto.nome)
    put("descricao", produto.descricao)
    put("preco", produto.preco)
 
   }
-  return db.insert(TABLE,"null", contentValues)
+  return db.insert(TABLE,"", contentValues)
  }
 
- fun buscarRegistros(id:Int): Produto? {
-  var Produto: Produto? = null
-  var cursor = db.query(TABLE, arrayOf("id", "nome", "descricao", "preco"), "id=?", arrayOf(id.toString()){
+ fun buscar(id:Int): Produto
+ {
+  var produto: Produto? = null
+  var cursor = db.query(TABLE, arrayOf("id", "nome", "descricao", "preco"), "id=?", arrayOf(id.toString()), null, null, null)
 
-   val id= cursor.getInt(0)
-   val nome = cursor.getString(1)
-   val descricao = cursor.getString(2)
-   val preco = cursor.getString(3)
-   produto = Produto(id, nome, descricao, preco)
+  val id = cursor.getInt(0)
+  val nome = cursor.getString(1)
+  val descricao = cursor.getString(2)
+  val preco = cursor.getString(3)
+  produto = Produto(id, nome, descricao, preco)
 
-
-  }
   cursor.close()
-   return usuario
-
-
-
-  )
-
-
-
+  return usuario
 
  }
 
@@ -55,7 +46,7 @@ private val TABLE = "Produtos"
   return db.delete(TABLE, "id = ?", arrayOf(id.toString()))
  }
 
- }
+}
 
 
 
