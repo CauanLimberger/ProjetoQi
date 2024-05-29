@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 @Composable
-fun DeleteScreen(navController: NavController){
+fun DeleteScreen(navController: NavController, onDelete:() -> Unit){
     Box(
         modifier = Modifier.fillMaxSize().padding(50.dp),contentAlignment = Alignment.TopCenter,
     ) { Column {
@@ -50,7 +50,11 @@ fun DeleteScreen(navController: NavController){
         contentAlignment = Alignment.BottomCenter
     ) {
         Button(
-            onClick = {  navController.navigate("Main_Screen") },
+            onClick = {
+
+                onDelete()
+                navController.navigate("Main_Screen")
+            },
             modifier = Modifier
                 .padding(30.dp)
                 .fillMaxWidth()
